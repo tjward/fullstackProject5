@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li><strong>{{message}}</strong></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('newMenuItem', restaurant_id = restaurant_id )}}"
+        method = 'post'>
+        <table>
+        <tr><td>Name:</td><td><input type='text' size='30' name='name'></td></tr>
+        <tr><td>Course:</td><td><input type='text' size='30' name='course'></td></tr>
+        <tr><td>Description:</td><td><input type='text' size='30' name='description'></td></tr>
+        <tr><td>Price:</td><td><input type='text' size='30' name='price'></td></tr>
+        </table>
+        <input type='submit' value='Create'>
+        
+        </form>
+ 
+
+        <div><a href="{{url_for('showMenu', restaurant_id = restaurant_id)}}">Click here to return to the menu.</a></div>
+         
+{% endblock %}

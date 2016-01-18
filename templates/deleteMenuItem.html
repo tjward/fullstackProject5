@@ -1,0 +1,32 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Edit {{ restaurant.name }}'s Menu</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li><strong>{{message}}</strong></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <div>Are you sure you want to delete this menu item???</div>
+        <form action="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=menuItem.id )}}"
+        method = 'post'>
+            <div>
+                <table>
+                    <tr><td>Name:</td><td>{{menuItem.name}}</td></tr>
+                    <tr><td>Course:</td><td>{{menuItem.course}}</td></tr>
+                    <tr><td>Description:</td><td>{{menuItem.description}}</td></tr>
+                    <tr><td>Price:</td><td>{{menuItem.price}}</td></tr>
+                </table>
+            </div>
+            <div><input type='submit' value='Delete'></div>
+        </form>
+        
+        </br></br>
+        <div><a href="{{url_for('showMenu', restaurant_id = restaurant_id)}}">Click here to return to the menu.</a></div>
+        
+    </body>
+</html>

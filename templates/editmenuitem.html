@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+{% block content %}
+        <h1>{{ restaurant.name }}'s Edit Menu Item</h1>
+        <div>Enter the updated values and click Submit!</div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li><strong>{{message}}</strong></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=menuItem.id )}}"
+        method = 'post'>
+            <div>
+                <table>
+                    <tr><td>Name:</td><td>{{menuItem.name}}</td><td></td><td><input type='text' size='30' name='name'></td></tr>
+                    <tr><td>Course:</td><td>{{menuItem.course}}</td><td></td><td><input type='text' size='30' name='course'></td></tr>
+                    <tr><td>Description:</td><td>{{menuItem.description}}</td><td></td><td><input type='text' size='30' name='description'></td></tr>
+                    <tr><td>Price:</td><td>{{menuItem.price}}</td><td></td><td><input type='text' size='30' name='price'></td></tr>
+                </table>
+            </div>
+            <div><input type='submit' value='Create'></div>
+        </form>
+        
+        <div><a href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">Click here to return to the menu.</a></div>
+        
+{% endblock %}
